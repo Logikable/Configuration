@@ -40,6 +40,7 @@ export PS1
 alias ll="ls -lAh"
 # git aliases
 alias ga="git add"
+alias gb="git blame"
 alias gc="git commit"
 alias gd="git diff"
 alias gpu="git pull"
