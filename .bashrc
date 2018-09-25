@@ -37,6 +37,15 @@ PS1+="\[$COLOR_CYAN\][\!]"
 PS1+="\[$COLOR_RESET\]$ "
 export PS1
 
+alias ll="ls -lAh"
+# git aliases
+alias ga="git add"
+alias gc="git commit"
+alias gd="git diff"
+alias gpu="git pull"
+alias gp="git push"
+alias gs="git status"
+
 ################ GIT BASH ONLY ################
 ### auto-add ssh key
 env=~/.ssh/agent.env
