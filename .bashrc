@@ -40,12 +40,16 @@ export PS1
 alias ll="ls -lAh"
 # git aliases
 alias ga="git add"
-alias gb="git blame"
+alias gbl="git blame"
+alias gbr="git branch"
 alias gc="git commit"
+alias gch="git checkout"
 alias gd="git diff"
 alias gl="git log"
+alias gm="git merge"
 alias gpu="git pull"
 alias gp="git push"
+alias gr="git reset"
 alias gs="git status"
 
 ################ GIT BASH ONLY ################
