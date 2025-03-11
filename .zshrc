@@ -49,8 +49,12 @@ autoload -Uz compinit && compinit -i
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
+WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+autoload -U select-word-style
+select-word-style normal
+
 source ~/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 #to know the key binding for a key, run `od -c` and press the key
 bindkey '^[[3~' delete-char           #enables DEL key proper behaviour
@@ -60,6 +64,7 @@ bindkey '^[[1;2D' backward-word
 bindkey '^[[1;3D' backward-word       #[Ctrl-LeftArrow] - move backward one word
 bindkey  "^[[H"   beginning-of-line   #[Home] - goes at the begining of the line
 bindkey  "^[[F"   end-of-line         #[End] - goes at the end of the line
+bindkey "^[[3;3~" kill-word
 
 #Enables history saving
 setopt appendhistory
@@ -101,24 +106,8 @@ function prompt_citc_client() {
   p10k segment -b green -f '#000000' -c "$CITC_CLIENT_NAME" -t "$CITC_CLIENT_NAME"
 }
 
-function prompt_gcert_expiry() {
-  remaining_time_gcert=$(gcertstatus -check_loas2=false -check_remaining=1h)
-  if [[ "$remaining_time_gcert" =~ (corp\/normal expires in )([0-9]+h [0-9]+m) ]]; then
-    CORP_NORMAL_CERT_REMAINING="${match[2]}"
-    CUSTOM_GLYPH=$'\uf623 '
-    GCERT_BG_COLOR='#5BB974'
-  else
-    CORP_NORMAL_CERT_REMAINING="Expired"
-    CUSTOM_GLYPH=$'\uf623 '
-    GCERT_BG_COLOR='#EE675C'
-  fi
-  p10k segment -b "$GCERT_BG_COLOR" -f '#ffffff' -c "$CORP_NORMAL_CERT_REMAINING" -t "$CUSTOM_GLYPH $CORP_NORMAL_CERT_REMAINING"
-}
-
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-# eval "$(starship init zsh)"
 
